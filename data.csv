@@ -1,0 +1,6 @@
+trial,control_value,control_error,exp_value,exp_error
+Trial 1,5,1,4,0.5
+Trial 2,6,1,7,0.7
+Trial 3,7,1,3,0.5
+Trial 4,7,1,5,0.25
+Trial 5,8,2,3,0.5
