@@ -1,2 +1,2 @@
 # Assignment_3
-Assignment 3: Pllotly in d3
+Assignment 3: Plotly in d3
