@@ -1,0 +1,114 @@
+<html>
+
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<h1> Plotly Error bar chart </h1>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div id="myDiv"></div>
+
+</head>
+
+<body>
+<script>
+Plotly.d3.csv("data.csv", data=>{
+var tabledata={}//empty object
+tabledata.trial=data.map(d => d.trial);
+tabledata.control_value=data.map(d => +d.control_value);//+ no convert to number
+tabledata.control_error=data.map(d => +d.control_error);
+tabledata.exp_value=data.map(d => +d.exp_value);//version actual needs semicolon
+tabledata.exp_error=data.map(d => +d.exp_error);
+console.log(tabledata)
+
+var trace1 = {
+  x: tabledata.trial,
+  y: tabledata.control_value,
+  name: 'Control',
+  error_y: {
+    type: 'data',
+    array: tabledata.control_error,
+    visible: true
+  },
+  type: 'bar'
+
+};
+var trace2 = {
+  x: tabledata.trial,
+  y: tabledata.exp_value,
+  name: 'Experimental',
+  error_y: {
+    type: 'data',
+    array: tabledata.exp_error,
+    visible: true
+  },
+  type: 'bar'
+};
+var data = [trace1, trace2];
+
+var layout = {barmode: 'group'};
+
+Plotly.newPlot('myDiv', data, layout);
+})
+</script>
+</body>
+</html>
